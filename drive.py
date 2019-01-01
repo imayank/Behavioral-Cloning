@@ -60,7 +60,7 @@ def telemetry(sid, data):
         # The current image from the center camera of the car
         imgString = data["image"]
         image = Image.open(BytesIO(base64.b64decode(imgString)))
-        image_array = np.asarray(image)
+        image_array = (np.asarray(image)/255)-0.5
         steering_angle = float(model.predict(image_array[None, :, :, :], batch_size=1))
 
         throttle = controller.update(float(speed))
@@ -115,9 +115,9 @@ if __name__ == '__main__':
     model_version = f.attrs.get('keras_version')
     keras_version = str(keras_version).encode('utf8')
 
-    if model_version != keras_version:
-        print('You are using Keras version ', keras_version,
-              ', but the model was built using ', model_version)
+    #if model_version != keras_version:
+        #print('You are using Keras version ', keras_version,
+         #     ', but the model was built using ', model_version)
 
     model = load_model(args.model)
 
