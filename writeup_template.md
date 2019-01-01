@@ -52,9 +52,31 @@ The model.py file contains the code for training and saving the convolution neur
 
 #### 1. An appropriate model architecture has been employed
 
-My model consists of a convolution neural network with 3x3 filter sizes and depths between 32 and 128 (model.py lines 18-24) 
+My model architecture is shown in thte following table:
 
-The model includes RELU layers to introduce nonlinearity (code line 20), and the data is normalized in the model using a Keras lambda layer (code line 18). 
+Layer                |        Description
+-------------------- | --------------------
+Input                | 160x320 normalized RGB image
+Cropping2D           | layer to crop the image from top and bottom (20 pixels each)
+Convolutional 5x5    | 24 filters with an stride of 2 and VALID padding. Uses an L2 regularizer for kernel weights with value of 0.0001
+elu Activation       | ELU activation layer
+Convolutional 5x5    | 36 filters with an stride of 2 and VALID padding. Uses an L2 regularizer for kernel weights with value of 0.0001
+elu Activation       | ELU activation layer
+Convolutional 5x5    | 48 filters with an stride of 2 and VALID padding. Uses an L2 regularizer for kernel weights with value of 0.0001
+elu Activation       | ELU activation layer
+Convolutional 3x3    | 64 filters with an stride of 1 and VALID padding. Uses an L2 regularizer for kernel weights with value of 0.0001
+elu Activation       | ELU activation layer
+Convolutional 3x3    | 64 filters with an stride of 1 and VALID padding. Uses an L2 regularizer for kernel weights with value of 0.0001
+elu Activation       | ELU activation layer
+Flatten layer        | layer to flatten the image matrix
+Dense layer, size:100| Fully connected layer of size 100. Uses an L2 regularizer for kernel weights with value of 0.0001
+elu Activation       | ELU activation layer
+Dense layer, size:50 | Fully connected layer of size 50. Uses an L2 regularizer for kernel weights with value of 0.0001
+elu Activation       | ELU activation layer
+Dense layer, size:10 | Fully connected layer of size 10. Uses an L2 regularizer for kernel weights with value of 0.0001
+elu Activation       | ELU activation layer
+Dense layer, size:1  | Fully connected layer of size 1.
+
 
 #### 2. Attempts to reduce overfitting in the model
 

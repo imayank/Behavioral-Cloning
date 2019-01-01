@@ -105,31 +105,6 @@ def dataGenerator(data, batch_size,base_path_img):
             
             yield images, target ## returning a batch
 
-""" Function creating a CNN model based on VGG-16"""
-def model_VGG():
-    model = Sequential()
-    #model.add(Lambda(normalize,input_shape=(160,320,3)))
-    model.add(Cropping2D(((20,20),(0,0)),input_shape=(160,320,3)))
-    model.add(Conv2D(64,3,padding='same',kernel_regularizer=regularizers.l2(0.0001)))
-    model.add(Activation('elu'))
-    model.add(MaxPooling2D())
-    model.add(Conv2D(128,3,padding='same',kernel_regularizer=regularizers.l2(0.0001)))
-    model.add(Activation('elu'))
-    model.add(MaxPooling2D())
-    model.add(Conv2D(256,3,padding='same',kernel_regularizer=regularizers.l2(0.0001)))
-    model.add(Activation('elu'))
-    model.add(MaxPooling2D())
-    model.add(Flatten())
-    """
-    model.add(Dense(100,kernel_regularizer=regularizers.l2(0.0001)))
-    model.add(Activation('elu'))
-    model.add(Dense(50,kernel_regularizer=regularizers.l2(0.0001)))
-    model.add(Activation('elu'))
-    model.add(Dense(10,kernel_regularizer=regularizers.l2(0.0001)))
-    model.add(Activation('elu'))"""
-    model.add(Dense(1))
-    
-    return model
 
 """ Function that creates a model as given in the NVIDIA research paper"""
 def model_nvidia_updated():
