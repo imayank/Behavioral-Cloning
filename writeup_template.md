@@ -77,12 +77,14 @@ Dense layer, size:10 | Fully connected layer of size 10. Uses an L2 regularizer 
 elu Activation       | ELU activation layer
 Dense layer, size:1  | Fully connected layer of size 1.
 
+The architecture used is one from the nVidia paper.The architecture uses convolutional layers with filters of size 5x5 and 3x3 of depth in between 24 and 64. The architecture also uses fully connected layer of size 100,50 and 10. The last layer in the model is a Dense layer of size 1 to produce the steering angle output. The paper does not specifies anything about the what kind of activation functions were used or what was done for overcoming the regularization. At first I used the architecture specified iin the paper as it is, but it didn't produced satiafactory results. So I added elu activation to add some non linearity in the model and L2 regularization for avoiding overfitting of the model. Dropout layer was also tried to deal with overfitting, but l2 regularization produced best results.
+
+The images which are fed to the model are normalized at the time of generating the batches using an python generator (*model.py*, line: 100). The respective change is also made in the file *drive.py* (line: 63)
 
 #### 2. Attempts to reduce overfitting in the model
 
-The model contains dropout layers in order to reduce overfitting (model.py lines 21). 
-
-The model was trained and validated on different data sets to ensure that the model was not overfitting (code line 10-16). The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
+Following steps were taken to reduce the overfittiing of the data:
+* 
 
 #### 3. Model parameter tuning
 
