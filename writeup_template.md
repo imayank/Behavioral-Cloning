@@ -32,6 +32,8 @@ The goals / steps of this project are the following:
 [image14]: ./example/reverse_2.jpg "reverse 2"
 [image15]: ./example/left.jpg "left"
 [image16]: ./example/right.jpg "right"
+[image17]: ./example/recovery_5.jpg "recovery 5"
+[image18]: ./example/recovery_6.jpg "recovery 6"
 
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
@@ -206,6 +208,10 @@ recovery driving image 3  | recovery driving image 4
 -----------|-----------
 ![alt text][image11] | ![alt text][image12]
 
+recovery driving image 5  | recovery driving image 6
+-----------|-----------
+![alt text][image17] | ![alt text][image18]
+
 
 * **Reverse lap:**
 Instead of augmenting image data by flipping the images, I actually drive the Track 1 in reverse direction. This will also help to generalize the model. some example image for reverse lap driving is presented below:
@@ -220,3 +226,15 @@ left camera image   | right camera image
 -----------|-----------
 ![alt text][image15] | ![alt text][image16]
 
+After the collection process, I had 61968 number of images. Each image is normalized at the time of generating batches of data for training. (*model.py*, line: 100). The respective change is also made in the file *drive.py* (line: 63)
+
+I split the data into training and validation set. 20% of the data is used for validation set.
+
+I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 3 after 3 epochs the validation mse doesn't decreased much also it started overfitting, and  I used an adam optimizer so that manually training the learning rate wasn't necessary.
+
+#### 4. Results
+
+The result video is recorded for both the tracks. The car is successfully able to navigate through first track and it almost completes the second track also. Which is a good thing and that also shows the model doesn't overfits the data, as it is primarily trained on the data from the first track.
+
+Video for first track --- track_1.mp4
+Video for second track --- track_2.mp4
