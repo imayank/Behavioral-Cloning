@@ -236,5 +236,6 @@ I used this training data for training the model. The validation set helped dete
 
 The result video is recorded for both the tracks. The car is successfully able to navigate through first track and it almost completes the second track also. Which is a good thing and that also shows the model doesn't overfits the data, as it is primarily trained on the data from the first track.
 
-Video for first track --- track_1.mp4
-Video for second track --- track_2.mp4
+Video for first track : track_1.mp4
+----
+Video for second track : track_2.mp4
