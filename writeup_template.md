@@ -84,35 +84,30 @@ The images which are fed to the model are normalized at the time of generating t
 #### 2. Attempts to reduce overfitting in the model
 
 Following steps were taken to reduce the overfittiing of the data:
-* 
+* L2 regularization was used in the convoltional and fully connected layer to penalize the kernel weights so that they do not grow out of bounds and overfit the training data. (*model.py*, lines:110-133)
+* The data was split in training and validtion sets to check whether or not the model was overfitting the data (*model.py*, line: 150 ). The number of epochs are set on the basis of training accuracy and validation accuracy. If the validation accuracy was dropped while training accuracy was increasing, then the model was probably started to overfitting the model and it is better to stop the training at earlier epoch.
+* To model was tested using the simulator by ensuring that the car remains in the track.
+* I used data from both the tracks to keep the model more general.
 
 #### 3. Model parameter tuning
 
-The model used an adam optimizer, so the learning rate was not tuned manually (model.py line 25).
+A batch size of 128 was used. I didn't tuned the batch size used in the training the model. *Adam optimizer* was used as an optimizer, so that I didn't need to tune for learning rate of the model. (*model.py*, line: 161-168) 
 
 #### 4. Appropriate training data
 
-Training data was chosen to keep the vehicle driving on the road. I used a combination of center lane driving, recovering from the left and right sides of the road ... 
+All the data used for training the self driving car was generated using the *Udacity self driving car simulator*. The data was recorded so as to keep thte car on the track. The data was recorded in the following manner:
 
-For details about how I created the training data, see the next section. 
+* **Central lane driving:** The car was driven through the first track keeping the car at the center of the road. The central lane driving data was recorded for two laps.
+* **Left side driving:** The car was driven through the first track keeping the car near the left yellow line of the road. The left side driving data was recorded for 2 laps.
+* **Right side driving:** The car was driven through the first track keeping the car near the right yellow line of the road. The right side driving data was recorded for 2 laps.
+* **Recovery driving:** Some amount of recovery driving was also recorded from the left and right side of the road. This was specially required for the turns and for the bridge portion of the first track.
+* **Second Track:** To make model more generalized, one lap of data was also recorded from the second track.
+* **Left and right cameras:**  Left and right camera images were also used for training the model.
 
 ### Model Architecture and Training Strategy
 
 #### 1. Solution Design Approach
 
-The overall strategy for deriving a model architecture was to ...
-
-My first step was to use a convolution neural network model similar to the ... I thought this model might be appropriate because ...
-
-In order to gauge how well the model was working, I split my image and steering angle data into a training and validation set. I found that my first model had a low mean squared error on the training set but a high mean squared error on the validation set. This implied that the model was overfitting. 
-
-To combat the overfitting, I modified the model so that ...
-
-Then I ... 
-
-The final step was to run the simulator to see how well the car was driving around track one. There were a few spots where the vehicle fell off the track... to improve the driving behavior in these cases, I ....
-
-At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
 
 #### 2. Final Model Architecture
 

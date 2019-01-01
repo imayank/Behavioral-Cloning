@@ -137,19 +137,19 @@ def model_nvidia_updated():
     return model
 
 
-
-undersampled_data = undersampling(data)
+### Tried undersampling the data, but results were not satisfactory, so end up using complete data for training
+"""undersampled_data = undersampling(data)
 undersampled_data = expanding_data(undersampled_data)
-undersampled_data = reset_and_add(undersampled_data)
+undersampled_data = reset_and_add(undersampled_data)"""
 
 ### using complete data
-"""undersampled_data = expanding_data(data)
-undersampled_data = reset_and_add(undersampled_data)"""
+undersampled_data = expanding_data(data)
+undersampled_data = reset_and_add(undersampled_data)
 
 ### dividing the data into training and validation sets 
 train_data, validation_data = train_test_split(undersampled_data,test_size=0.2,random_state=42)
 
-#create data generators for training and validation
+#create data generators for training and validation with batch size of 128
 train_generator = dataGenerator(train_data, 128,base_path_img)
 valid_generator = dataGenerator(validation_data,128, base_path_img)
 
@@ -160,7 +160,7 @@ model = model_nvidia_updated()
 ## Compiling the model using Adam optimizer and mean squared error as loss function
 model.compile(loss='mse',optimizer='adam')
 
-## training the model using fit_generator 
+## training the model using fit_generator, batch size = 128
 model.fit_generator(generator=train_generator,
                     steps_per_epoch = (len(train_data)//128)+1,
                     validation_data=valid_generator,
